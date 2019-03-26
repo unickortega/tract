@@ -34,15 +34,16 @@ export default {
         hide(){}
     },
     mounted(){
-        jQuery('body').css({
-            overflow: 'hidden'
-        })
+        // jQuery('body').css({
+        //     overflow: 'hidden'
+        // })
     }
 }
 </script>
 <style lang="scss" scoped>
 .blog-popup{
     position: fixed;
+    display: none;
     top: 0px;
     left: 0px;
     height: 100%;

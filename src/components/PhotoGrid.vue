@@ -1,11 +1,11 @@
 <template>
     <div class="row m-0">
-        <photo-container class="grid-item col-6" :source="asset('/2.jpeg')"/>
-        <photo-container class="grid-item col-3" :source="asset('/1.jpeg')"/>
+        <photo-container class="grid-item col-6" :source="asset('/2.jpg')"/>
+        <photo-container class="grid-item col-3" :source="asset('/1.jpg')"/>
         <photo-container class="grid-item col-3" :source="asset('/3.jpg')"/>
-        <photo-container class="grid-item col-3" :source="asset('/2.jpeg')"/>
-        <photo-container class="grid-item col-3" :source="asset('/1.jpeg')"/>
-        <photo-container class="grid-item col-3" :source="asset('/2.jpeg')"/>
+        <photo-container class="grid-item col-3" :source="asset('/2.jpg')"/>
+        <photo-container class="grid-item col-3" :source="asset('/1.jpg')"/>
+        <photo-container class="grid-item col-3" :source="asset('/2.jpg')"/>
         <photo-container class="grid-item col-3" :source="asset('/3.jpg')"/>
     </div>
 </template>
