@@ -6,7 +6,7 @@
     
         <div class="row">
             <div class="col-md-4">
-                <blog-card/>
+                <blog-card @click.native="showBlog($event)"/>
             </div>
             <div class="col-md-4">
                 <blog-card/>
@@ -18,7 +18,7 @@
                 <blog-card/>
             </div>
         </div>
-        <blog-popup/>
+        <blog-popup ref="blog-popup"/>
     </div>
 </template>
 <script>
@@ -28,6 +28,11 @@ export default {
     components: {
         BlogCard,
         BlogPopup
+    },
+    methods: {
+        showBlog(ev){
+            this.$refs['blog-popup'].show(ev);
+        }
     }
 }
 </script>
