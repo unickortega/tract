@@ -42,7 +42,7 @@
                     <li>Aenean sit amet erat nunc</li>
                     <li>Eget porttitor lorem</li>
                 </ul>
-                <markdown/>
+                <component :is="markdown" v-if="markdown"/>
             </div>
         </div>
     </div>
@@ -50,20 +50,18 @@
 <script>
 import jQuery from 'jquery'
 import { setTimeout } from 'timers';
-import Markdown from '@/md/markdown.md'
 export default {
     data: ()=>({
         position: {
             x: 0,
             y: 0
         },
-        transition_speed: 500
+        transition_speed: 500,
+        markdown: null
     }),
-    components: {
-        Markdown
-    },
     methods: {
-        show(position={x:0,y:0}){
+        show(position={x:0,y:0}, component){
+            this.markdown = component
             let _position = this.calculateCenter(position);
             this.position = _position;
             console.log(_position)

@@ -9,7 +9,7 @@
                 <blog-card @click.native="showBlog($event)"/>
             </div>
             <div class="col-md-4">
-                <blog-card/>
+                <blog-card @click.native="showBlog2($event)"/>
             </div>
             <div class="col-md-4">
                 <blog-card/>
@@ -24,6 +24,8 @@
 <script>
 import BlogCard from '@/components/BlogCard'
 import BlogPopup from '@/components/BlogPopup'
+import Markdown from '@/md/markdown.md'
+import Markdown2 from '@/md/markdown2.md'
 export default {
     components: {
         BlogCard,
@@ -31,7 +33,10 @@ export default {
     },
     methods: {
         showBlog(ev){
-            this.$refs['blog-popup'].show(ev);
+            this.$refs['blog-popup'].show(ev, Markdown);
+        },
+        showBlog2(ev){
+            this.$refs['blog-popup'].show(ev, Markdown2);
         }
     }
 }
