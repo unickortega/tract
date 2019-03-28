@@ -1,48 +1,14 @@
 <template>
     <div class="blog-popup">
         <div class="close-popup" @click="hide"></div>
-        <div class="blog-body">
-            <div class="header" :style="`background-image: url(${asset('/1.jpg')});`"></div>
+        <div class="blog-body" v-if="markdown">
+            <div class="header" :style="`background-image: url(${asset(markdown.picture)});`"></div>
             <div class="popup-content container">
                 <blockquote class="blockquote text-center pt-5">
-                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                    <footer class="blockquote-footer">March 20, 2019</footer>
+                    <p class="mb-0">{{markdown.title}}</p>
+                    <footer class="blockquote-footer">{{markdown.date}}</footer>
                 </blockquote>
-                <ul class="list-unstyled">
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Consectetur adipiscing elit</li>
-                    <li>Integer molestie lorem at massa</li>
-                    <li>Facilisis in pretium nisl aliquet</li>
-                    <li>Nulla volutpat aliquam velit
-                        <ul>
-                        <li>Phasellus iaculis neque</li>
-                        <li>Purus sodales ultricies</li>
-                        <li>Vestibulum laoreet porttitor sem</li>
-                        <li>Ac tristique libero volutpat at</li>
-                        </ul>
-                    </li>
-                    <li>Faucibus porta lacus fringilla vel</li>
-                    <li>Aenean sit amet erat nunc</li>
-                    <li>Eget porttitor lorem</li>
-                </ul>
-                <ul class="list-unstyled">
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Consectetur adipiscing elit</li>
-                    <li>Integer molestie lorem at massa</li>
-                    <li>Facilisis in pretium nisl aliquet</li>
-                    <li>Nulla volutpat aliquam velit
-                        <ul>
-                        <li>Phasellus iaculis neque</li>
-                        <li>Purus sodales ultricies</li>
-                        <li>Vestibulum laoreet porttitor sem</li>
-                        <li>Ac tristique libero volutpat at</li>
-                        </ul>
-                    </li>
-                    <li>Faucibus porta lacus fringilla vel</li>
-                    <li>Aenean sit amet erat nunc</li>
-                    <li>Eget porttitor lorem</li>
-                </ul>
-                <component :is="markdown" v-if="markdown"/>
+                <component :is="markdown.md" v-if="markdown"/>
             </div>
         </div>
     </div>
@@ -82,6 +48,7 @@ export default {
                     })
                     jQuery(this.$el).find('.blog-body').css({opacity: 1})
                     jQuery(this.$el).find('.blog-body').scrollTop(0)
+                    jQuery(this.$el).css({transition: `${this.transition_speed / 2}ms ease all`})
                 }, this.transition_speed)
             }, 10)
         },

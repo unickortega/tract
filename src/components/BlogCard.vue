@@ -1,9 +1,9 @@
 <template>
     <div class="blog-card">
-        <photo-container class="image-container" :source="asset('/1.jpg')"/>
-        <div class="blog-title">h4. Bootstrap heading</div>
+        <photo-container class="image-container" :source="asset(markdown.picture)"/>
+        <div class="blog-title">{{markdown.title}}</div>
         <p>
-            Have you ever wanted to aesthetically group together multiple elements on a page? Have you ever wanted to look classy while you do it? Now you can!
+            {{markdown.description}}
         </p>
     </div>
 </template>
@@ -12,7 +12,13 @@ import PhotoContainer from '@/components/PhotoContainer'
 export default {
     components: {
         PhotoContainer
-    }
+    },
+    props: {
+        markdown: {
+            type: Object,
+            required: true
+        }
+    },
 }
 </script>
 <style lang="scss" scoped>
