@@ -2,7 +2,7 @@
     <div class="blog-popup">
         <div class="close-popup" @click="hide"></div>
         <div class="blog-body">
-            <div class="header"></div>
+            <div class="header" :style="`background-image: url(${asset('/1.jpg')});`"></div>
             <div class="popup-content container">
                 <blockquote class="blockquote text-center pt-5">
                     <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
@@ -42,6 +42,7 @@
                     <li>Aenean sit amet erat nunc</li>
                     <li>Eget porttitor lorem</li>
                 </ul>
+                <markdown/>
             </div>
         </div>
     </div>
@@ -49,6 +50,7 @@
 <script>
 import jQuery from 'jquery'
 import { setTimeout } from 'timers';
+import Markdown from '@/md/markdown.md'
 export default {
     data: ()=>({
         position: {
@@ -57,6 +59,9 @@ export default {
         },
         transition_speed: 500
     }),
+    components: {
+        Markdown
+    },
     methods: {
         show(position={x:0,y:0}){
             let _position = this.calculateCenter(position);
@@ -78,6 +83,7 @@ export default {
                         overflow: 'hidden'
                     })
                     jQuery(this.$el).find('.blog-body').css({opacity: 1})
+                    jQuery(this.$el).find('.blog-body').scrollTop(0)
                 }, this.transition_speed)
             }, 10)
         },
@@ -135,7 +141,6 @@ export default {
         background-attachment: fixed;
         background-repeat: no-repeat;
         background-position: center center;
-        background-image: url('/1.jpg');
         z-index: 0;
         @media(max-width: 768px){
             background-attachment:local;

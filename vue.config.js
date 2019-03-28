@@ -11,5 +11,29 @@ module.exports = {
           data: `@import "~@/assets/css/app.scss";`
         },
       }
+    },
+    configureWebpack: {
+      resolve: {
+        alias: {
+          'vue$': 'vue/dist/vue.esm.js'
+        }
+      },
+      module: {
+        rules: [
+          // ...
+          {
+            test: /\.md$/,
+            loaders: [
+              'vue-loader',
+              {
+                loader: 'vue-md-loader',
+                options: {
+                  // your preferred options
+                }
+              }
+            ]
+          }
+        ]
+      }
     }
 }
