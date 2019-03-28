@@ -5,17 +5,8 @@
         </h1>
     
         <div class="row">
-            <div class="col-md-4">
-                <blog-card @click.native="showBlog($event)"/>
-            </div>
-            <div class="col-md-4">
-                <blog-card @click.native="showBlog2($event)"/>
-            </div>
-            <div class="col-md-4">
-                <blog-card/>
-            </div>
-            <div class="col-md-4">
-                <blog-card/>
+            <div class="col-md-4" v-for="(markdown,index) in markdowns" v-bind:key="index">
+                <blog-card @click.native="showBlog($event, markdown)"/>
             </div>
         </div>
         <blog-popup ref="blog-popup"/>
@@ -24,20 +15,33 @@
 <script>
 import BlogCard from '@/components/BlogCard'
 import BlogPopup from '@/components/BlogPopup'
-import Markdown from '@/md/markdown.md'
-import Markdown2 from '@/md/markdown2.md'
+
+const requireContext = require.context('@/md', true, /.*\.md$/)
+const cover_requireContext = require.context('@/md/', true, /.*\.(gif|jpg|jpeg|tiff|png)$/)
+const image_keys = cover_requireContext.keys()
+
+
+const markdowns = requireContext.keys().map(file=>{
+
+    var folder = file.split('./')[1]
+    folder = folder.split('markdown')[0]
+    console.log(cover_requireContext(image_keys[0]))
+    return requireContext(file).default
+})
+console.log(markdowns)
+
 export default {
+    data: ()=>({
+        markdowns: markdowns
+    }),
     components: {
         BlogCard,
         BlogPopup
     },
     methods: {
-        showBlog(ev){
-            this.$refs['blog-popup'].show(ev, Markdown);
+        showBlog(ev, markdown){
+            this.$refs['blog-popup'].show(ev, markdown);
         },
-        showBlog2(ev){
-            this.$refs['blog-popup'].show(ev, Markdown2);
-        }
     }
 }
 </script>
