@@ -42,7 +42,7 @@
           <div class="col-md-4 p-0">
             <flat-card class="card-gray">
               <template v-slot:header>Lorem ipsum</template>
-              Have you ever wanted to aesthetically group together multiple elements on a page? Have you ever wanted to look classy while you do it? Now you can!
+              <router-link :to="{name:'about'}">Have</router-link> you ever wanted to aesthetically group together multiple elements on a page? Have you ever wanted to look classy while you do it? Now you can!
             </flat-card>
           </div>
         </div>
