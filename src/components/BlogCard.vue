@@ -23,6 +23,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .blog-card{
+    cursor: pointer;
     .image-container{
         position: relative;
         height: 150px;
