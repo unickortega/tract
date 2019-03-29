@@ -30,27 +30,29 @@ export default {
             this.markdown = component
             let _position = this.calculateCenter(position);
             this.position = _position;
-            console.log(_position)
-            jQuery(this.$el).css({transition: 'initial'})
-            jQuery(this.$el).css({left: _position.x, top: _position.y})
-            jQuery(this.$el).css({transform: 'scale(0)'})
-            jQuery(this.$el).css({display: 'block'})
-            jQuery(this.$el).find('.blog-body').css({opacity: 0})
-            jQuery(this.$el).css({transition: `${this.transition_speed}ms ease all`})
-            jQuery(this.$el).find('.blog-body').css({transition: `${this.transition_speed}ms ease all`})
-            setTimeout(()=>{
-                jQuery(this.$el).css({left: 0, top: 0})
-                jQuery(this.$el).css({transform: 'scale(1)'})
-                
+
+            this.$nextTick(()=>{
+                jQuery(this.$el).css({transition: 'initial'})
+                jQuery(this.$el).css({left: _position.x, top: _position.y})
+                jQuery(this.$el).css({transform: 'scale(0)'})
+                jQuery(this.$el).css({display: 'block'})
+                jQuery(this.$el).find('.blog-body').css({opacity: 0})
+                jQuery(this.$el).css({transition: `${this.transition_speed}ms ease all`})
+                jQuery(this.$el).find('.blog-body').css({transition: `${this.transition_speed}ms ease all`})
                 setTimeout(()=>{
-                    jQuery('body').css({
-                        overflow: 'hidden'
-                    })
-                    jQuery(this.$el).find('.blog-body').css({opacity: 1})
-                    jQuery(this.$el).find('.blog-body').scrollTop(0)
-                    jQuery(this.$el).css({transition: `${this.transition_speed / 2}ms ease all`})
-                }, this.transition_speed)
-            }, 10)
+                    jQuery(this.$el).css({left: 0, top: 0})
+                    jQuery(this.$el).css({transform: 'scale(1)'})
+                    
+                    setTimeout(()=>{
+                        jQuery('body').css({
+                            overflow: 'hidden'
+                        })
+                        jQuery(this.$el).find('.blog-body').css({opacity: 1})
+                        jQuery(this.$el).find('.blog-body').scrollTop(0)
+                        jQuery(this.$el).css({transition: `${this.transition_speed / 2}ms ease all`})
+                    }, this.transition_speed)
+                }, 10)
+            })
         },
         hide(){
             jQuery(this.$el).find('.blog-body').css({transition: 'initial'})
