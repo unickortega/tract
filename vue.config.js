@@ -35,5 +35,19 @@ module.exports = {
           }
         ]
       }
+    },
+    pages: {
+      index: {
+        entry: './src/main.js',
+        template: 'public/index.html',
+        title: 'Uelmar Ortega',
+        chunk: ['chunk-vendors']
+      },
+      404: {
+        entry: './src/main.js',
+        template: 'public/index.html',
+        title: 'Uelmar Ortega',
+        chunk: ['chunk-vendors']
+      }
     }
 }
