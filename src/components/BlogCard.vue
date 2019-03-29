@@ -1,6 +1,6 @@
 <template>
     <div class="blog-card">
-        <photo-container class="image-container" :source="asset(markdown.picture)"/>
+        <photo-container class="image-container" :source="markdown.picture"/>
         <div class="blog-title">{{markdown.title}}</div>
         <p>
             {{markdown.description}}
