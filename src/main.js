@@ -33,6 +33,8 @@ global.onscroll = ()=>{
     })
 };
 
+global.jQuery = require('jquery')
+
 Vue.mixin(mixins)
 
 new Vue({

@@ -7,13 +7,16 @@
         <photo-container class="grid-item col-3" :source="asset('/1.jpg')"/>
         <photo-container class="grid-item col-3" :source="asset('/2.jpg')"/>
         <photo-container class="grid-item col-3" :source="asset('/3.jpg')"/>
+        <photo-viewer/>
     </div>
 </template>
 <script>
 import PhotoContainer from '@/components/PhotoContainer'
+import PhotoViewer from '@/components/PhotoViewer'
 export default {
     components:{
-        PhotoContainer
+        PhotoContainer,
+        PhotoViewer
     }
 }
 </script>
