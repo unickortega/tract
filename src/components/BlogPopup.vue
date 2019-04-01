@@ -2,7 +2,7 @@
     <div class="blog-popup">
         <div class="close-popup" @click="hide"></div>
         <div class="blog-body" v-if="markdown">
-            <div class="header" :style="`background-image: url(${asset(markdown.picture)});`"></div>
+            <div class="header" :style="`background-image: url(${markdown.picture});`"></div>
             <div class="popup-content container">
                 <blockquote class="blockquote text-center pt-5">
                     <p class="mb-0">{{markdown.title}}</p>
