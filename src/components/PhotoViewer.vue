@@ -1,57 +1,79 @@
 <template>
-    <div class="photo-viewer">
-        <img :src="asset('/1.jpg')" alt="">
-    </div>
+    <popup ref="popup">
+        <div class="photo-viewer" v-if="photo">
+            <div class="image" :style="`background-image: url(${photo.src})`"></div>
+        </div>
+        <div class="navigation">
+            <div @click="image_index--"><</div>
+            <div @click="image_index++">></div>
+        </div>
+    </popup>
 </template>
 <script>
+import Popup from '@/components/Popup'
 export default {
-    methods: {
-        adjustPhoto(){
-            let img = jQuery(this.$el).find('img')[0]
-
-            var w = img.width
-            var h = img.height
-            var hquotient = h / w
-
-            var wh = jQuery(document).width() * hquotient
-
-            if(wh < window.innerHeight){
-                jQuery(img).css({
-                    height: '90%',
-                    width: 'initial'
-                })
-            }
-            else{
-                jQuery(img).css({
-                width: '90%',
-                height: 'initial'
-                })
-            }
-
+    components:{
+        Popup
+    },
+    props: {
+        images: {
+            type: Array,
+            default: null
         }
     },
-    methods(){
-        // window.resizeables.push(this.resizeImage)
-        // window.scrollables.push(this.scrollEvent)
+    data: () => ({
+        photo: null,
+        image_index: ''
+    }),
+    methods: {
+        show(position, data){
+            console.log(data)
+            this.photo = data
+            this.$refs.popup.show(position)
+        }
     }
 }
 </script>
 <style lang="scss" scoped>
 .photo-viewer{
-    position: fixed;
-    background: black;
-    height: 100%;
-    width: 100%;
+    position: absolute;
     top: 0px;
     left: 0px;
-    overflow: auto;
-    z-index: 1010;
-    img{
+    width: 100%;
+    height: 100%;
+    background: #343434;
+    .image{
+        height: 80%;
+        width: 90%;
         position: absolute;
-        width: 100%;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        top: 50%;
+        transform: translate(-50%,-50%);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+    }
+}
+.navigation{
+    color: #a2a2a2;
+    font-size: 100px;
+    div:hover{
+        color: white;
+        cursor: pointer;
+    }
+    div:first-child{
+        position: absolute;
+        top: 50%;
+        left: 0px;
+        transform: translateY(-50%);
+    }
+
+    div:last-child{
+        position: absolute;
+        top: 50%;
+        right: 0px;
+        transform: translateY(-50%);
     }
 }
 </style>
