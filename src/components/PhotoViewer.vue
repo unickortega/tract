@@ -1,11 +1,11 @@
 <template>
     <popup ref="popup">
         <div class="photo-viewer" v-if="photo">
-            <div class="image" :style="`background-image: url(${photo.src})`"></div>
+            <div class="image" :style="`background-image: url(${this.images[image_index]})`"></div>
         </div>
         <div class="navigation">
-            <div @click="image_index--"><</div>
-            <div @click="image_index++">></div>
+            <div @click="image_index--" :style="(image_index == 0 ? 'color: #2d2d2d': '')"><</div>
+            <div @click="image_index++" :style="(image_index >= this.images.length - 1 ? 'color: #2d2d2d': '')">></div>
         </div>
     </popup>
 </template>
@@ -27,9 +27,34 @@ export default {
     }),
     methods: {
         show(position, data){
+            this.image_index = this.images.findIndex(i => i == data.src)
             console.log(data)
             this.photo = data
             this.$refs.popup.show(position)
+        }
+    },
+    mounted(){
+        jQuery(document).keyup((ev)=>{
+            if(ev.which == 37){
+                this.image_index--
+            }
+            if(ev.which == 39){
+                this.image_index++
+            }
+            if(ev.which == 27){
+                this.$refs.popup.hide()
+            }
+        })
+    },
+    watch: {
+        image_index(){
+            if(this.image_index < 0){
+                this.image_index = 0
+            }
+
+            if(this.image_index >= this.images.length){
+                this.image_index = this.images.length - 1
+            }
         }
     }
 }
