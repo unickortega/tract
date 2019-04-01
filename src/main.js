@@ -23,13 +23,13 @@ global.scrollables = [];
 // 
 global.onresize = ()=>{
   resizeables.forEach((el)=>{
-    el()
+    try{ el() }catch(ev){}
   })
 };
 
 global.onscroll = ()=>{
     scrollables.forEach((el)=>{
-        el()
+        try{ el() }catch(ev){}
     })
 };
 

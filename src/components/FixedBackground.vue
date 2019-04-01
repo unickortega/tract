@@ -55,8 +55,7 @@ export default {
         this.scrollEvent()
         window.resizeables.push(this.resizeImage)
         window.scrollables.push(this.scrollEvent)
-        
-    }
+    },
 }
 </script>
 <style lang="scss" scoped>
