@@ -1,6 +1,6 @@
 <template>
     <div class="row m-0">
-        <photo-container v-for="(image, index) in images" v-bind:key="index" class="grid-item" :class="index == 0 ? 'col-6':'col-3'" :source="asset(image)" @click.native="viewPhoto($event, { src: asset(image) })"/>
+        <photo-container v-for="(image, index) in images" v-bind:key="index" class="grid-item" :class="index == 0 ? 'col-6':'col-3'" :source="image" @click.native="viewPhoto($event, { src: (image) })"/>
         <photo-viewer :images="images" ref="viewer"/>
     </div>
 </template>

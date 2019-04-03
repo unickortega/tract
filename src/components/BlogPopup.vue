@@ -1,6 +1,5 @@
 <template>
-    <div class="blog-popup">
-        <div class="close-popup" @click="hide"></div>
+    <popup ref="popup">
         <div class="blog-body" v-if="markdown">
             <div class="header" :style="`background-image: url(${markdown.picture});`"></div>
             <div class="popup-content container">
@@ -11,12 +10,14 @@
                 <component :is="markdown.md" v-if="markdown"/>
             </div>
         </div>
-    </div>
+    </popup>
 </template>
 <script>
-import jQuery from 'jquery'
-import { setTimeout } from 'timers';
+import Popup from '@/components/Popup'
 export default {
+    components: {
+        Popup
+    },
     data: ()=>({
         position: {
             x: 0,
@@ -28,53 +29,8 @@ export default {
     methods: {
         show(position={x:0,y:0}, component){
             this.markdown = component
-            let _position = this.calculateCenter(position);
-            this.position = _position;
-
-            this.$nextTick(()=>{
-                jQuery(this.$el).css({transition: 'initial'})
-                jQuery(this.$el).css({left: _position.x, top: _position.y})
-                jQuery(this.$el).css({transform: 'scale(0)'})
-                jQuery(this.$el).css({display: 'block'})
-                jQuery(this.$el).find('.blog-body').css({opacity: 0})
-                jQuery(this.$el).css({transition: `${this.transition_speed}ms ease all`})
-                jQuery(this.$el).find('.blog-body').css({transition: `${this.transition_speed}ms ease all`})
-                setTimeout(()=>{
-                    jQuery(this.$el).css({left: 0, top: 0})
-                    jQuery(this.$el).css({transform: 'scale(1)'})
-                    
-                    setTimeout(()=>{
-                        jQuery('body').css({
-                            overflow: 'hidden'
-                        })
-                        jQuery(this.$el).find('.blog-body').css({opacity: 1})
-                        jQuery(this.$el).find('.blog-body').scrollTop(0)
-                        jQuery(this.$el).css({transition: `${this.transition_speed / 2}ms ease all`})
-                    }, this.transition_speed)
-                }, 10)
-            })
+            this.$refs.popup.show(position)
         },
-        hide(){
-            jQuery(this.$el).find('.blog-body').css({transition: 'initial'})
-            jQuery(this.$el).css({transform: 'scale(0)'})
-            jQuery(this.$el).find('.blog-body').css({opacity: 0})
-
-            jQuery(this.$el).css({left: this.position.x, top: this.position.y})
-            setTimeout(()=>{
-                jQuery('body').css({
-                    overflow: 'initial'
-                })
-                jQuery(this.$el).css({
-                    display: 'none'
-                })
-            }, this.transition_speed)
-        },
-        calculateCenter(position){
-            return {
-                x: position.x - (window.innerWidth / 2),
-                y: position.y - (window.innerHeight / 2),
-            }
-        }
     },
     mounted(){
         // 
@@ -82,25 +38,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.blog-popup{
-    position: fixed;
-    display: none;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: white;
-    z-index: 2000;
-
-    .blog-body{
-        overflow: auto;
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0px;
-        left: 0px;
-    }
-
+.blog-body{
     .header{
         width: 100%;
         height: 70vh;
