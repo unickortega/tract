@@ -16,11 +16,13 @@ export default {
             y: 0
         },
         transition_speed: 500,
+        visible: false
     }),
     methods: {
         show(position={x:0,y:0}){
             let _position = this.calculateCenter(position);
             this.position = _position;
+            this.visible = true
 
             this.$nextTick(()=>{
                 jQuery(this.$el).css({transition: 'initial'})
@@ -46,6 +48,7 @@ export default {
             })
         },
         hide(){
+            this.visible = false
             jQuery(this.$el).find('.unick-body').css({transition: 'initial'})
             jQuery(this.$el).css({transform: 'scale(0)'})
             jQuery(this.$el).find('.unick-body').css({opacity: 0})

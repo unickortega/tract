@@ -28,21 +28,22 @@ export default {
     methods: {
         show(position, data){
             this.image_index = this.images.findIndex(i => i == data.src)
-            console.log(data)
             this.photo = data
             this.$refs.popup.show(position)
         }
     },
     mounted(){
         jQuery(document).keyup((ev)=>{
-            if(ev.which == 37){
-                this.image_index--
-            }
-            if(ev.which == 39){
-                this.image_index++
-            }
-            if(ev.which == 27){
-                this.$refs.popup.hide()
+            if(this.$refs.popup.visible){
+                if(ev.which == 37){
+                    this.image_index--
+                }
+                if(ev.which == 39){
+                    this.image_index++
+                }
+                if(ev.which == 27){
+                    this.$refs.popup.hide()
+                }
             }
         })
     },
