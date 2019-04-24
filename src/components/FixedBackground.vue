@@ -1,6 +1,6 @@
 <template>
-    <div ref="footer" class="photo-container fixed-background">
-        <img ref="image" :src="source">
+    <div ref="footer" class="photo-container fixed-background" :class="!detectIfChrome()?'use-css':''" :style="`background-image: url(${!detectIfChrome()?source:''})`">
+        <img ref="image" :src="source" v-if="detectIfChrome()">
         <div class="gradient" :class="gradient"></div>
         <div class="position-relative">
             <slot/>
@@ -29,7 +29,7 @@ export default {
 
             if(wh < window.innerHeight){
                 jQuery(this.$refs['image']).css({
-                    height: (window.width > 768)? window.innerHeight + 10 : '100%',
+                    height: (window.width > 768)? window.innerHeight + 10 : window.innerHeight,
                     width: 'initial'
                 })
             }
@@ -40,6 +40,9 @@ export default {
                 })
             }
         },
+        detectIfChrome(){
+            return !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+        },
         scrollEvent(){
             var footer_position = jQuery(this.$refs.footer).position()
             var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
@@ -49,12 +52,15 @@ export default {
         }
     },
     mounted(){
-        this.$refs['image'].onload = () =>{
-            this.resizeImage()
+        if(this.detectIfChrome()){
+            this.$refs['image'].onload = () =>{
+                this.resizeImage()
+            }
+            this.scrollEvent()
+        
+            window.resizeables.push(this.resizeImage)
+            window.scrollables.push(this.scrollEvent)
         }
-        this.scrollEvent()
-        window.resizeables.push(this.resizeImage)
-        window.scrollables.push(this.scrollEvent)
     },
 }
 </script>
@@ -63,15 +69,16 @@ export default {
     position: relative;
     padding: 50px 0px;
     overflow: hidden;
-    min-height: 100vh;
     border-top: 1px solid white;
-    // background-size: cover;
-    // background-attachment: fixed;
-    // background-repeat: no-repeat;
-    // background-position: center center;
-    // @media(max-width: 768px){
-    //     background-attachment:local;
-    // }
+    &.use-css{
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+        @media(max-width: 768px){
+            background-attachment:local;
+        }
+    }
     .gradient{
         position: absolute;
         height: 105%;

@@ -7,14 +7,14 @@
           <div class="col-md-5">
             <tract/>
           </div>
-          <div class="col-md-7">
+          <!-- <div class="col-md-7">
             <h3 class="pt-5" style="font-family: 'Cabin Sketch', cursive; color: white;">
             You see, at just the right time, when we were still powerless, Christ died for the ungodly.
             Very rarely will anyone die for a righteous person, though for a good person someone might possibly dare to die.
             But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.
             </h3>
             <h5 style="font-family: 'Cabin Sketch', cursive; color: white;">Romans 5:6-8</h5>
-          </div>
+          </div> -->
         </div>
       </div>
     </fixed-background>

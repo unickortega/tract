@@ -1,6 +1,7 @@
 <template>
     <div class="photo-container">
-        <img ref="image" :src="source">
+        <!-- <img ref="image" :src="source"> -->
+        <div class="image" :style="`background-image: url(${source})`"></div>
         <div class="gradient"></div>
     </div>
 </template>
@@ -36,10 +37,10 @@ export default {
         }
     },
     mounted(){
-        this.$refs['image'].onload =()=>{
-            this.resizeImage()
-        }
-        window.resizeables.push(this.resizeImage)
+        // this.$refs['image'].onload =()=>{
+        //     this.resizeImage()
+        // }
+        // window.resizeables.push(this.resizeImage)
     }
 }
 </script>
@@ -48,6 +49,7 @@ export default {
     position: relative;
     padding: 0px;
     overflow: hidden;
+    cursor: pointer;
     .gradient{
         position: absolute;
         height: 105%;
@@ -59,17 +61,18 @@ export default {
         opacity: 0.5;
         transition: 500ms ease all;
     }
-    img{
+    .image{
         height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+        width: 100%;
+        background-size: cover;
+        background-attachment: local;
+        background-repeat: no-repeat;
+        background-position: center center;
         transition: 500ms ease all;
     }
     &:hover{
-        img{
-            transform: translate(-50%,-50%) scale(1.25);
+        .image{
+            transform:scale(1.25);
         }
         .gradient{
             opacity: 0;

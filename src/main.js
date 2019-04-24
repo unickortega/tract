@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+require('./plugins/eventsHandler.js')
 
 Vue.config.productionTip = false
 
@@ -14,24 +15,6 @@ const mixins = {
     }
   }
 }
-
-global.resizeables = [];
-global.scrollables = [];
-
-// for events
-// 
-// 
-global.onresize = ()=>{
-  resizeables.forEach((el)=>{
-    try{ el() }catch(ev){}
-  })
-};
-
-global.onscroll = ()=>{
-    scrollables.forEach((el)=>{
-        try{ el() }catch(ev){}
-    })
-};
 
 global.jQuery = require('jquery')
 
