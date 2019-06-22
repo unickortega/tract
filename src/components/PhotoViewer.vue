@@ -26,7 +26,8 @@ export default {
         image_index: ''
     }),
     methods: {
-        show(position, data){
+        show(position, data)
+        {
             this.image_index = this.images.findIndex(i => i == data.src)
             this.photo = data
             this.$refs.popup.show(position)
